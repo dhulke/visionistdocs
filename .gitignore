@@ -1,0 +1,14 @@
+# Secrets — never commit (holds the portal password + session)
+.env
+
+# macOS cruft
+.DS_Store
+
+# Download-state indexes (paired with the archive below; reproducible)
+.comunicados.idx
+.documentos.idx
+
+# The downloaded archive itself — large and reproducible via ./scripts/sync-all.sh.
+# This repo versions the tooling (scripts + docs), not the mirrored files.
+# Delete this line if you'd rather commit the documents too.
+/Arquivos/
