@@ -61,6 +61,57 @@ caches the resulting session as `PHPSESSID`. You normally never touch these:
 `.env` holds your password in plain text, so it's kept `chmod 600` (owner-only).
 Don't commit it.
 
-## Requirements
+## Installation
 
-`bash`, `curl`, `jq`, `perl` (`brew install jq`).
+The scripts need `bash`, `curl`, `jq` and `perl` (plus standard Unix tools:
+`grep`, `sed`, `awk`). Optionally install `pdftotext` for full-text search
+inside the archived PDFs (macOS can use the built-in Spotlight/`mdfind`
+instead).
+
+### macOS
+
+Everything ships with the OS except `jq`:
+
+```sh
+brew install jq
+brew install poppler        # optional: pdftotext for PDF full-text search
+```
+
+### Linux
+
+`bash` and `perl` are preinstalled on all common distros; add the rest:
+
+```sh
+sudo apt install curl jq                 # Debian/Ubuntu
+sudo apt install poppler-utils           # optional: pdftotext
+
+sudo dnf install curl jq poppler-utils   # Fedora/RHEL
+```
+
+### Windows
+
+Pick one of two routes — no changes to the scripts are needed for either:
+
+**Option A — WSL (recommended).** Run the tool inside a Linux environment:
+
+```powershell
+wsl --install               # installs WSL + Ubuntu, then reboot/open Ubuntu
+```
+
+Inside Ubuntu, clone the repo and follow the Linux instructions above.
+
+**Option B — Git Bash.** [Git for Windows](https://gitforwindows.org/) already
+bundles `bash`, `curl`, `perl` and the Unix tools; only `jq` is missing:
+
+```powershell
+winget install jqlang.jq    # or drop jq.exe from jq's releases into your PATH
+```
+
+Then run `./scripts/sync-all.sh` from a Git Bash terminal. Two caveats:
+
+- `chmod 600 .env` is a no-op on NTFS, so the credentials file is **not**
+  permission-protected the way it is on macOS/Linux.
+- Comunicado filenames are long (~130 chars); clone to a short path like
+  `C:\visionist` to stay under Windows' 260-character path limit, or enable
+  long-path support (`git config core.longpaths true` plus the
+  `LongPathsEnabled` registry setting).

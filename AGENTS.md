@@ -102,5 +102,6 @@ first.
 
 ## Requirements
 
-`bash`, `curl`, `jq`, `perl` (install jq with `brew install jq`). Search tips use
+`bash`, `curl`, `jq`, `perl` — see the **Installation** section of `README.md`
+for per-OS setup (macOS, Linux, Windows via WSL or Git Bash). Search tips use
 `grep`/`find` (always available) and optionally `mdfind` (macOS) / `pdftotext`.
